@@ -1,15 +1,18 @@
-# [destination_branches] always comes from the config of the default branch,
-# never from the branch of the pull request.  The pull request of this test
-# targets [dest], so without this key the only valid destination is the default
-# branch, [check_valid_destination_branch] answers NOOP, and no plan runs.
-destination_branches:
-  - dest
-
-tree_builder:
+# An open pull request with the config builder on, whose apply is held open by a hook, so that the
+# test can push to the feature branch while the apply runs (RFD 2356).
+config_builder:
   enabled: true
   script: |
     #! /usr/bin/env bash
-    $TERRATEAM_ROOT/bin/tree-builder
+    echo '{"engine": {"name": "tofu"}}'
 
 engine:
   name: tofu
+
+hooks:
+  apply:
+    pre:
+    - cmd:
+      - 'sleep'
+      - '60'
+      type: run
