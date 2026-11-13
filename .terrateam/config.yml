@@ -1,2 +1,9 @@
 engine:
   name: tofu
+parameters:
+  names:
+    mode:
+      values:
+      - DEBUG
+      - RELEASE
+      fail_if_set: true
