@@ -1,7 +1,9 @@
-# A plan and an apply join the run of the steps before them.  The default,
-# setup, permits the tree builder, the config builder and the indexer only.
-batch_runs:
-  merge_steps: all
-
+dirs:
+  database:
+    when_modified:
+      depends_on: dir:base
 engine:
   name: tofu
+when_modified:
+  prechecks:
+    - user: ['!terrateam-test-user02']
