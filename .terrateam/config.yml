@@ -1,17 +1,8 @@
-access_control:
-  apply_require_all_dirspace_access: false
-  enabled: true
-  policies:
-  - apply: []
-    plan:
-    - '*'
-    tag_query: dir:tf2
-  - apply:
-    - '*'
-    plan:
-    - '*'
-    tag_query: ''
 engine:
   name: tofu
-when_modified:
-  autoplan: false
+  
+apply_requirements:
+  checks:
+    approved:
+      count: 1
+      enabled: true
